@@ -1,7 +1,5 @@
-output "public_instance_ip" {
-  value = aws_instance.public.public_ip
-}
-
-output "private_instance_id" {
-  value = aws_instance.private.id
+output "vpc_id" {
+  description = "The ID of the VPC"
+  value       = aws_vpc.main.id
+  
 }

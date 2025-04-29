@@ -27,7 +27,7 @@ resource "aws_security_group" "private_ec2" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = [aws_subnet.public.cidr_block]
+    cidr_blocks = [var.public_subnet_cidr]
   }
 
   egress {

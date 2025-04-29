@@ -5,7 +5,6 @@ resource "aws_instance" "public" {
   subnet_id     = var.public_subnet_id
   key_name      = var.aws_key_pair
   security_groups = [var.public_security_group_id]
-
   tags = {
     Name = "PublicEC2"
   }
@@ -17,7 +16,7 @@ resource "aws_instance" "private" {
   subnet_id     = var.private_subnet_id
   key_name      = var.aws_key_pair
   vpc_security_group_ids = [var.private_security_group_id]
-
+  private_ip = aws_instance.public.private_ip
   tags = {
     Name = "PrivateEC2"
   }
