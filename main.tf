@@ -1,0 +1,13 @@
+provider "aws" {
+  region = var.aws_region
+}
+
+module "vpc_setup" {
+  source = "./modules/vpc"
+
+  vpc_cidr           = var.vpc_cidr
+  public_subnet_cidr = var.public_subnet_cidr
+  private_subnet_cidr = var.private_subnet_cidr
+
+  public_key_path    = var.public_key_path
+}
