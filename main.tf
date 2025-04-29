@@ -20,7 +20,7 @@ module "nat-gateway" {
   public_subnet_id = module.subnets.public_subnet_id
 }
 
-module "aws_internet_gateway" {
+module "internet-gateway" {
   source = "./modules/internet-gateway"
   vpc_id = module.vpc.vpc_id
 }
@@ -31,7 +31,7 @@ module "route-tables" {
   private_subnet_id = module.subnets.private_subnet_id
   public_subnet_id  = module.subnets.public_subnet_id
   nat_id            = module.nat-gateway.nat_gateway_id
-  gw_id             = module.aws_internet_gateway.internet_gateway_id
+  gw_id             = module.internet-gateway.internet_gateway_id
 }
 
 module "security-groups" {
