@@ -29,3 +29,5 @@ override.tf.json
 
 
 .terraform.lock.hcl
+
+secret-key.pem

@@ -8,10 +8,6 @@ resource "aws_route_table" "public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = var.gw_id
   }
-  route {
-    cidr_block = "10.0.2.0/24"
-    gateway_id = "local"
-  }
 }
 
 resource "aws_route_table_association" "public" {
@@ -28,10 +24,6 @@ resource "aws_route_table" "private" {
   route {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = var.nat_id
-  }
-  route {
-    cidr_block = "10.0.1.0/24"
-    gateway_id = "local"
   }
 }
 

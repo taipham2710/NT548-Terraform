@@ -6,8 +6,9 @@ variable "aws_key_pair" {
   
 }
 
+
 variable "ami_id" {
-  default = "ami-0c55b159cbfafe1f0" # Amazon Linux 2
+  default = "ami-00a929b66ed6e0de6" # Amazon Linux 2
 }
 
 variable "instance_type" {
