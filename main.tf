@@ -40,6 +40,11 @@ module "security-groups" {
   public_subnet_cidr = module.subnets.public_subnet_cidr
 }
 
+// generate a random suffix for the key name to avoid collisions after multiple runs
+resource "random_id" "suffix" {
+  byte_length = 4
+}
+
 resource "aws_key_pair" "deployer" {
   key_name   = "secret-key-${random_id.suffix.hex}"
   public_key = file(var.public_key_path)
