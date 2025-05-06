@@ -16,7 +16,7 @@ func setup(t *testing.T) *terraform.Options {
 	return terraformOptions
 }
 
-// VPC Module Tests
+// Module Tests
 func TestInfra(t *testing.T) {
 	terraformOptions := setup(t)
 	defer terraform.Destroy(t, terraformOptions)
@@ -31,10 +31,6 @@ func TestInfra(t *testing.T) {
 		assert.NotEmpty(t, vpcCIDR, "VPC CIDR block should not be empty")
 		assert.Regexp(t, `^\d+\.\d+\.\d+\.\d+/\d+$`, vpcCIDR, "CIDR block should be in correct format")
 	})
-
-	defer terraform.Destroy(t, terraformOptions)
-
-	terraform.InitAndApply(t, terraformOptions)
 
 	t.Run("Public subnet is created correctly", func(t *testing.T) {
 		publicSubnetID := terraform.Output(t, terraformOptions, "public_subnet_id")

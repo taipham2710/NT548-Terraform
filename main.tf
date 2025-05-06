@@ -41,7 +41,7 @@ module "security-groups" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = "secret-key"
+  key_name   = "secret-key-${random_id.suffix.hex}"
   public_key = file(var.public_key_path)
 }
 
