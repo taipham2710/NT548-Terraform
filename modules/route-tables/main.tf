@@ -1,5 +1,5 @@
 # Create a route table for the public subnet and associate it with the public subnet
-resource "aws_route_table" "public" { 
+resource "aws_route_table" "public" {
   vpc_id = var.vpc_id
   tags = {
     Name = "PublicRouteTable"
