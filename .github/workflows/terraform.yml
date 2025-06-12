@@ -47,6 +47,15 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         chmod 644 ~/.ssh/id_rsa.pub
 
+    - name: Upload SSH Key Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ssh-key-${{ github.sha }}
+        path: |
+          ~/.ssh/id_rsa
+          ~/.ssh/id_rsa.pub
+        retention-days: 5
+    
     - name: Terraform Format Check
       id: fmt
       run: terraform fmt -check -recursive
@@ -148,9 +157,14 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Generate SSH Key Pair
+    - name: Download SSH Key Artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ssh-key-${{ github.sha }}
+        path: ~/.ssh
+
+    - name: Set permissions for SSH key
       run: |
-        ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
         chmod 600 ~/.ssh/id_rsa
         chmod 644 ~/.ssh/id_rsa.pub
 
