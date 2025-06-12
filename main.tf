@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "./modules/vpc"
+  source   = "./modules/vpc"
   vpc_cidr = var.vpc_cidr
 }
 
@@ -15,8 +15,8 @@ module "subnets" {
 }
 
 module "nat-gateway" {
-  source = "./modules/nat-gateway"
-  vpc_id = module.vpc.vpc_id
+  source           = "./modules/nat-gateway"
+  vpc_id           = module.vpc.vpc_id
   public_subnet_id = module.subnets.public_subnet_id
 }
 
@@ -26,8 +26,8 @@ module "internet-gateway" {
 }
 
 module "route-tables" {
-  source = "./modules/route-tables"
-  vpc_id = module.vpc.vpc_id
+  source            = "./modules/route-tables"
+  vpc_id            = module.vpc.vpc_id
   private_subnet_id = module.subnets.private_subnet_id
   public_subnet_id  = module.subnets.public_subnet_id
   nat_id            = module.nat-gateway.nat_gateway_id
@@ -35,8 +35,8 @@ module "route-tables" {
 }
 
 module "security-groups" {
-  source = "./modules/security-groups"
-  vpc_id = module.vpc.vpc_id
+  source             = "./modules/security-groups"
+  vpc_id             = module.vpc.vpc_id
   public_subnet_cidr = module.subnets.public_subnet_cidr
 }
 
@@ -51,7 +51,7 @@ resource "aws_key_pair" "deployer" {
 }
 
 module "ec2" {
-  source                   = "./modules/ec2"
+  source                    = "./modules/ec2"
   private_security_group_id = module.security-groups.private_security_group_id
   public_security_group_id  = module.security-groups.public_security_group_id
   public_subnet_id          = module.subnets.public_subnet_id
