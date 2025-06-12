@@ -1,5 +1,5 @@
 variable "aws_region" {
-  default     = "us-east-1"
+  default = "us-east-1"
   description = "AWS region to deploy resources in"
 }
 
@@ -17,5 +17,5 @@ variable "private_subnet_cidr" {
 
 variable "public_key_path" {
   description = "Path to your SSH public key"
-  default     = "${path.module}/.ssh/id_rsa.pub"
+  default     = "~/.ssh/id_rsa.pub"
 }
