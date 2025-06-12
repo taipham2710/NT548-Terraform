@@ -47,7 +47,7 @@ resource "random_id" "suffix" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "secret-key-${random_id.suffix.hex}"
-  public_key = trimspace(file(var.public_key_path))
+  public_key = trimspace(var.public_key)
 }
 
 module "ec2" {

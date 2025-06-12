@@ -15,7 +15,7 @@ variable "private_subnet_cidr" {
   default = "10.0.2.0/24"
 }
 
-variable "public_key_path" {
-  description = "Path to your SSH public key"
-  default     = "~/.ssh/id_rsa.pub"
+variable "public_key" {
+  description = "SSH public key"
+  type        = string
 }
